@@ -11,11 +11,40 @@ export default async function DashboardPage() {
     }
 
     if (currentUser.role === Role.ADMIN) {
-        const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany({
+            where:{
+                role:{
+                    not:Role.ADMIN
+                }
+            }
+        });
 
         return (
             <div>
                 <h1 className="text-center mx-1 text-3xl font-bold text-blue-600">Admin Dashboard</h1>
+                <div className="space-y-4">
+                    <div className="rounded-lg bg-slate-700 p-4">
+                        <p className="text-sm text-slate-400">Name</p>
+                        <p className="text-lg font-medium text-white">
+                            {currentUser.name}
+                        </p>
+                    </div>
+
+                    <div className="rounded-lg bg-slate-700 p-4">
+                        <p className="text-sm text-slate-400">Email</p>
+                        <p className="text-lg font-medium text-white">
+                            {currentUser.email}
+                        </p>
+                    </div>
+
+                    <div className="rounded-lg bg-slate-700 p-4">
+                        <p className="text-sm text-slate-400">Role</p>
+                        <span className="inline-block rounded-full bg-blue-600 px-3 py-1 text-sm font-medium text-white">
+                            {currentUser.role}
+                        </span>
+                    </div>
+                </div> 
+                 <h1 className="text-3xl font-bold mx-1 text-center"> Other users</h1>
 
                 <table className="w-full overflow-hidden rounded-lg border border-gray-700 bg-gray-800 text-white shadow-lg">
                     <thead className="bg-gray-700">
