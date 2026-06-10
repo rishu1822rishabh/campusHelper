@@ -25,19 +25,19 @@ async function main() {
                 name: "Admin User",
                 email: "admin@example.com",
                 password: adminPassword,
-                role: Role.ADMIN,
+                role:Role.ADMIN,
             },
             {
                 name: "Rishabh",
                 email: "rishabh@example.com",
                 password: userPassword,
-                role: Role.User,
+                role: Role.USER,
             },
             {
                 name: "John Doe",
                 email: "john@example.com",
                 password: userPassword,
-                role: Role.User,
+                role:Role.USER
             },
         ],
     });

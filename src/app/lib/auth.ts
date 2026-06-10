@@ -77,7 +77,7 @@ export function userPermission(
 ): boolean {
     const roleHierarchy = {
         [Role.ADMIN]: 1,
-        [Role.User]: 0,
+        [Role.USER]: 0,
     };
 
     return (

@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: Promise<{ userid: string }> }
 ) {
     try {
         const currentUser = await getCurrentUser();
@@ -30,9 +30,9 @@ export async function PATCH(
             );
         }
 
-        const { id } = await params;
+        const { userid } = await params;
 
-        if (currentUser.id === id) {
+        if (currentUser.id === userid) {
             return NextResponse.json(
                 {
                     status: "error",
@@ -57,7 +57,7 @@ export async function PATCH(
         }
 
         const user = await prisma.user.findUnique({
-            where: { id },
+            where: { id: userid },
         });
 
         if (!user) {
@@ -71,7 +71,7 @@ export async function PATCH(
         }
 
         const updatedUser = await prisma.user.update({
-            where: { id },
+            where: { id: userid },
             data: {
                 role: role as Role,
             },

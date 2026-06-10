@@ -7,20 +7,20 @@ export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
     if ( !email || !password) {
         return NextResponse.json({
-            status: "email and password are required"
+            message: "email and password are required"
         }, { status: 400 })
 
     }
     const user=await prisma.user.findUnique({where:{email}});
     if(!user){
         return NextResponse.json({
-            status: "user with this mail does not exist"
+            message: "user with this mail does not exist"
         }, { status: 400 })
     }
     const isvalispass = await verifyPassword(password,user.password)
     if(!isvalispass){
         return NextResponse.json({
-            status: "password error"
+            message: "password error"
         }, { status: 407 })
 
     }

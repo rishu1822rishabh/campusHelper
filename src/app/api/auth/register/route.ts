@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
     const hashpass = await hashPassword(password);
     const count = await prisma.user.count()
-    const role = (count == 0) ? Role.ADMIN : Role.User;
+    const role = (count == 0) ? Role.ADMIN : Role.USER;
     const user = await prisma.user.create({
         data: {
             name,

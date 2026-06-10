@@ -7,6 +7,12 @@ export interface User{
     updatedAt:Date
 }
 export enum Role{
-    ADMIN="Admin",
-    User="user"
+    ADMIN="ADMIN",
+    USER="USER"
+}
+export interface Authcontexttype{
+    user:User|null,
+    login:(formdata:FormData)=>void,
+    logout:()=>void,
+    checkPermission:(requiredrole:Role)=>boolean,
 }
