@@ -20,7 +20,7 @@ export async function PATCH(
             );
         }
 
-        if (currentUser.role !== Role.Admin) {
+        if (currentUser.role !== Role.ADMIN) {
             return NextResponse.json(
                 {
                     status: "error",
@@ -44,7 +44,7 @@ export async function PATCH(
 
         const { role } = await request.json();
 
-        const validRoles = [Role.Admin, Role.user];
+        const validRoles = [Role.ADMIN, Role.USER];
 
         if (!validRoles.includes(role as Role)) {
             return NextResponse.json(

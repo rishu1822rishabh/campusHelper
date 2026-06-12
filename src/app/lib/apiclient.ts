@@ -54,6 +54,14 @@ class ApiClient {
             body: JSON.stringify(userdata),
         });
     }
+    
+    async edit(userdata:unknown) {
+        return this.request("/api/infoedit", {
+            method: "PUT",
+            body: JSON.stringify(userdata),
+        });
+    }
+    
 
     async logout() {
         return this.request("/api/auth/logout", {

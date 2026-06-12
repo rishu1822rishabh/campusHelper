@@ -21,6 +21,7 @@ export default async function DashboardPage() {
 
         return (
             <div>
+               <div className="text-right mt-6"><Link href='/dashboard/admin/createuser' className="text-3xl font-bold text-center mr-3  bg-blue-700 text-white hover:bg-blue-500 p-1.5 rounded-3xl ">create new user</Link></div>
                 <h1 className="text-center mx-1 text-3xl font-bold text-blue-600">Admin Dashboard</h1>
                 <div className="space-y-4">
                     <div className="rounded-lg bg-slate-700 p-4">
@@ -44,7 +45,7 @@ export default async function DashboardPage() {
                         </span>
                     </div>
                 </div>
-                <h1 className="text-3xl font-bold mx-1 text-center"> Other users</h1>
+                <h1 className="text-3xl font-bold mx-1"> Other users</h1>
 
                 <table className="w-full overflow-hidden rounded-lg border border-gray-700 bg-gray-800 text-white shadow-lg">
                     <thead className="bg-gray-700">

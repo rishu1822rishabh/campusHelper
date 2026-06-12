@@ -1,10 +1,8 @@
-THIS_SHOULD_BREAK;
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 
-export async function proxy(request: NextRequest) {
-    console.log("PROXY RUNNING");
+export async function proxy(request: NextRequest){
     const token = request.cookies.get("token")?.value;
 
     if (!token) {
@@ -16,10 +14,8 @@ export async function proxy(request: NextRequest) {
             process.env.JWT_SECRET
         );
         const { payload } = await jwtVerify(token, secret);
-        console.log("Payload:", payload);
-        console.log("Role:", payload.role);
 
-        if (payload.role !== "ADMIN") {
+        if (payload.userrole !== "ADMIN") {
             return NextResponse.redirect(
                 new URL("/dashboard/user", request.url)
             );
