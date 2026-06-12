@@ -3,9 +3,11 @@
 import { apiClient } from "@/app/lib/apiclient";
 import Link from "next/link";
 import { useActionState } from "react";
+import toast from "react-hot-toast";
 
 export type LoginState = {
     error?: string;
+    
     success?: boolean;
 };
 
@@ -20,17 +22,26 @@ const Loginfunction = () => {
 
             try {
                 await apiClient.login(email, password);
+                toast.success("login successful !", {
+                    position: "top-center",
+                })
 
-                window.location.href = "/";
+
+                setTimeout(()=>{
+                    window.location.href="/"
+                },1000)
 
                 return {
                     success: true,
                 };
             } catch (error) {
+                toast.error("login failed !!", {
+                    position: "top-center",
+                })
                 return {
                     error:
                         error instanceof Error
-                            ? error.message
+                            ? JSON.parse(error.message).message
                             : "Login failed",
                 };
             }

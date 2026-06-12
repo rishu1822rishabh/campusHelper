@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         }, { status: 407 })
 
     }
-    const token = getToken(user.id);
+    const token = getToken(user.id,user.role);
     const response = NextResponse.json({
         user: {
             id: user.id,

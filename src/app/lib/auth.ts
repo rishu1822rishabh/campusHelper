@@ -20,9 +20,10 @@ export async function verifyPassword(
     return await argon2.verify(hashedPassword, password);
 }
 
-export function getToken(userid: string): string {
+export function getToken(userid: string,userrole:string): string {
     return jwt.sign(
-        { userid },
+        { userid,
+        userrole},
         JWT_SECRET,
         {
             expiresIn: "7d",

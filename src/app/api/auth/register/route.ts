@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
             role
         }
     })
-    const token=getToken(user.id);
+    const token=getToken(user.id,user.role);
     const response=NextResponse.json({
         user:{
             id:user.id,
