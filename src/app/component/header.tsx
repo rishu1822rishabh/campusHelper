@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from '../type';
+import { Role, User } from '../type';
 import Link from 'next/link';
 import LogoutButton from './logoutbutton';
 interface headerprop {
@@ -27,7 +27,8 @@ const Header = ({ user }: headerprop) => {
                         </span>
 
                        <LogoutButton/>
-                        <Link href='/dashboard' className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700" >Go to Dashboard</Link>
+                        <Link href='/dashboard/user' className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700" >Go to user dashboard</Link>
+                        { user.role===Role.ADMIN &&(<Link href='/dashboard/admin' className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700" >Go to Admin dashboard</Link>)}
                     </div>
                 ) : (
                     <div className="flex items-center gap-3">

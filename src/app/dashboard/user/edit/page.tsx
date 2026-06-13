@@ -10,7 +10,7 @@ export type EditState = {
     success?: boolean;
 };
 
-const EditFunction =() => {
+const EditFunction = () => {
     const [state, editAction, isPending] = useActionState(
         async (
             prevState: EditState,
@@ -62,8 +62,8 @@ const EditFunction =() => {
         <div className="flex min-h-screen items-center justify-center bg-slate-900">
             <div className="w-full max-w-md rounded-lg border border-slate-700 bg-slate-800 p-8">
                 <div className="mb-8 text-center">
-                    <h2 className="text-2xl font-bold text-white">
-                        edit profile
+                    <h2 className="mb-6 text-center text-3xl font-bold text-white">
+                        Edit Your Profile
                     </h2>
                 </div>
 
