@@ -1,3 +1,4 @@
+import Changerole from "@/app/component/changerole";
 import { getCurrentUser } from "@/app/lib/auth";
 import { prisma } from "@/app/lib/database";
 import { Role } from "@/app/type";
@@ -80,6 +81,7 @@ export default async function DashboardPage() {
                                         {user.role}
                                     </span>
                                 </td>
+                                <td><Changerole userdata={user}/></td>
                             </tr>
                         ))}
                     </tbody>

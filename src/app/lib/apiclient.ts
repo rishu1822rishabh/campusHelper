@@ -77,10 +77,10 @@ class ApiClient {
         return this.request("/api/user");
     }
 
-    async changeRole(userId: string, role: Role) {
+    async changeRole(userId: string) {
         return this.request(`/api/user/${userId}/role`, {
             method: "PATCH",
-            body: JSON.stringify({ role }),
+            body: JSON.stringify({ role:Role.ADMIN }),
         });
     }
 }
