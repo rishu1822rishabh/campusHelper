@@ -83,6 +83,12 @@ class ApiClient {
             body: JSON.stringify({ role:Role.ADMIN }),
         });
     }
+    async analyseresume(resumeContent:string) {
+        return this.request("/api/analysedres", {
+            method: "POST",
+            body: JSON.stringify({resumeContent}),
+        });
+    }
 }
 
 export const apiClient = new ApiClient();

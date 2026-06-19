@@ -4,8 +4,9 @@ import { apiClient } from '../lib/apiclient'
 import toast from 'react-hot-toast';
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { User } from '../type';
 
-const Changerole = ({ userdata }) => {
+const Changerole = ( userdata :User) => {
     const route=useRouter()
     const changerole = async () => {
 
