@@ -6,10 +6,29 @@ import ReactMarkdown from "react-markdown";
 
 
 export default function ResumeAnalyzerPage() {
-    const [resumeContent, setResumeContent] = useState("");
     const [analysis, setAnalysis] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [resumeContent,setResumeContent]=useState("");
+    const handleUpload = async (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const file = e.target.files?.[0];
+
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("resume", file);
+
+        const res = await fetch("/api/getresumedata", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await res.json();
+
+        setResumeContent(data.text);
+    };
 
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>
@@ -32,7 +51,7 @@ export default function ResumeAnalyzerPage() {
 
 
             setAnalysis(
-                data.analysis||
+                data.analysis ||
                 JSON.stringify(data, null, 2)
             );
         } catch (error) {
@@ -57,14 +76,20 @@ export default function ResumeAnalyzerPage() {
                     onSubmit={handleSubmit}
                     className="space-y-4"
                 >
-                    <textarea
-                        value={resumeContent}
-                        onChange={(e) =>
-                            setResumeContent(e.target.value)
-                        }
-                        placeholder="Paste resume here..."
-                        className="w-full h-80 p-4 rounded-lg border text-black bg-gray-600"
-                    />
+                    <div className="p-6">
+                        <input
+                            type="file"
+                            accept=".pdf"
+                            onChange={handleUpload}
+                        />
+                        {resumeContent && (
+                            <textarea
+                                value={resumeContent}
+                                readOnly
+                                className="w-full h-64 p-4 bg-gray-800 text-white rounded"
+                            />
+                        )}
+                        </div>
 
                     <button
                         type="submit"
