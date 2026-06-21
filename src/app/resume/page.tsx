@@ -3,13 +3,24 @@
 import { useState } from "react";
 import { apiClient } from "../lib/apiclient";
 import ReactMarkdown from "react-markdown";
+import Strength from "../component/strength";
+import Weakness from "../component/weakness";
+import Improvement from "../component/improvement";
+import ScoreCard from "../component/scorecard";
+interface Analysis {
+    strengths: string[];
+    weaknesses: string[];
+    recommendations: string[];
+    how_to_improve: string[];
+}
 
 
 export default function ResumeAnalyzerPage() {
-    const [analysis, setAnalysis] = useState("");
+
+    const [analysis, setAnalysis] = useState<Analysis | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const [resumeContent,setResumeContent]=useState("");
+    const [resumeContent, setResumeContent] = useState("");
     const handleUpload = async (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -43,15 +54,19 @@ export default function ResumeAnalyzerPage() {
         try {
             setLoading(true);
             setError("");
-            setAnalysis("");
+            setAnalysis(null);
 
             const data = await apiClient.analyseresume(
                 resumeContent
             );
+            const cleanedJson = data.analysis
+                .replace(/```json/g, "")
+                .replace(/```/g, "")
+                .trim();
 
 
             setAnalysis(
-                data.analysis ||
+                JSON.parse(cleanedJson) ||
                 JSON.stringify(data, null, 2)
             );
         } catch (error) {
@@ -89,12 +104,12 @@ export default function ResumeAnalyzerPage() {
                                 className="w-full h-64 p-4 bg-gray-800 text-white rounded"
                             />
                         )}
-                        </div>
+                    </div>
 
                     <button
                         type="submit"
                         disabled={loading}
-                        className="bg-blue-600 text-white px-6 py-3 rounded-lg disabled:opacity-50"
+                        className="bg-blue-600 text-white px-6 py-3 rounded-lg disabled:opacity-50 text-center"
                     >
                         {loading
                             ? "Analyzing..."
@@ -109,18 +124,39 @@ export default function ResumeAnalyzerPage() {
                 )}
 
                 {analysis && (
-                    <div className="mt-6 bg-gray-800 p-6 rounded-lg">
-                        <h2 className="text-xl font-semibold text-white mb-4">
+                    <div className="max-w-[850px] mx-auto">
+                        <h2 className="text-xl text-center font-semibold text-white mb-4">
                             Analysis Result
                         </h2>
 
-                        <div className="whitespace-pre-wrap text-gray-200">
-                            <ReactMarkdown>{analysis}</ReactMarkdown>
-                            
+                        <div className="flex flex-wrap gap-3 justify-center">
+                            <Strength analysisstrength={analysis.strengths} />
+                            <Weakness analysisweakness={analysis.weaknesses} />
+                            <Improvement analysisneedtoimprove={analysis.recommendations} />
+                            <ScoreCard
+                                title="overall Score"
+                                value={analysis.overallScore}
+                            />
+                            <ScoreCard
+                                title="recruiter Score"
+                                value={analysis.recruiterScore}
+                            />
+                            <ScoreCard
+                                title="ATS Score"
+                                value={analysis.atsScore}
+                            />
+                        <ScoreCard
+                            title="projects"
+                            value={analysis.projects.score}
+                        />
+                        <ScoreCard
+                            title="experience"
+                            value={analysis.experience.score}
+                        />
                         </div>
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 }
