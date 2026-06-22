@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { apiClient } from "../lib/apiclient";
 import ReactMarkdown from "react-markdown";
 import Strength from "../component/strength";
@@ -16,11 +16,15 @@ interface Analysis {
 
 
 export default function ResumeAnalyzerPage() {
+    const inputref=useRef<HTMLInputElement>(null);
 
     const [analysis, setAnalysis] = useState<Analysis | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [resumeContent, setResumeContent] = useState("");
+    const handleButtonClick = () => {
+        inputref.current?.click();
+    };
     const handleUpload = async (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -93,10 +97,13 @@ export default function ResumeAnalyzerPage() {
                 >
                     <div className="p-6">
                         <input
+                            className="hidden"
+                            ref={inputref}
                             type="file"
                             accept=".pdf"
                             onChange={handleUpload}
                         />
+                        <button type="button" onClick={handleButtonClick}>upload your resume</button>
                         {resumeContent && (
                             <textarea
                                 value={resumeContent}
