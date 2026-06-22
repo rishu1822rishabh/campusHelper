@@ -1,8 +1,11 @@
 import React from 'react'
+interface strengthsProps {
+    analysisstrength : string[];
+}
 
-const Strength = ({analysisstrength}) => {
+const Strength = ({analysisstrength}:strengthsProps) => {
   return (
-      <div className="bg-gray-800 rounded-xl p-6 w-[400px]">
+      <div className="bg-gray-800 rounded-xl p-6 w-100">
           <h3 className="text-green-400 text-xl mb-4">
               💪 Strengths
           </h3>

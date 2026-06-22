@@ -14,9 +14,9 @@ const Header = ({ user }: headerprop) => {
                 {/* Logo */}
                 <Link
                     href="/"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white"
+                    className="flex h-11 w-fit items-center p-1 px-2.5 justify-center rounded-full bg-blue-600 text-xl font-bold text-white hover:bg-blue-800"
                 >
-                    R
+                    Campus Helper
                 </Link>
 
                 {/* Right Side */}

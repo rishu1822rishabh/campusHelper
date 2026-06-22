@@ -1,9 +1,24 @@
 import React from 'react'
 import { getCurrentUser } from '../lib/auth';
 import Link from 'next/link';
+import { apiClient } from '../lib/apiclient';
 
-const page = async() => {
-    const user= await getCurrentUser();
+const page = async () => {
+  let resumeanalysis;
+  const user = await getCurrentUser();
+  if(user){
+    const data = await apiClient.analyseresume(
+      user?.resumedata || ""
+    );
+    const cleanedJson = data.analysis
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+
+    resumeanalysis = JSON.parse(cleanedJson);
+  }
+  
   return (
     <main className="bg-slate-50 text-gray-800">
 
@@ -39,52 +54,74 @@ const page = async() => {
             </div>
           </div>
 
-          {/* Right */}
-          <div className="flex justify-center">
-            <div className="w-full max-w-md rounded-3xl bg-white shadow-2xl p-8">
+          {user && (
+            <div className="flex justify-center">
+              <div className="w-full max-w-md rounded-3xl bg-white shadow-2xl p-8">
+                <div className="flex justify-between mb-6">
+                  <div>
+                    <h2 className="font-bold text-xl">Resume Report</h2>
+                    <p className="text-gray-500 text-sm">
+                      AI Generated Analysis
+                    </p>
+                  </div>
 
-              <div className="flex justify-between mb-6">
-                <div>
-                  <h2 className="font-bold text-xl">Resume Report</h2>
-                  <p className="text-gray-500 text-sm">
-                    AI Generated Analysis
-                  </p>
-                </div>
-
-                <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">
-                  92%
-                </div>
-              </div>
-
-              <div className="space-y-4">
-
-                <div>
-                  <p className="text-sm font-medium mb-1">ATS Score</p>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-blue-600 h-3 rounded-full w-[92%]"></div>
+                  <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">
+                    {resumeanalysis.overallScore * 10}
                   </div>
                 </div>
 
-                <div>
-                  <p className="text-sm font-medium mb-1">Skills Match</p>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-green-500 h-3 rounded-full w-[88%]"></div>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between">
+                      <p className="text-sm font-medium mb-1">ATS Score</p>
+                      <p className="text-sm mb-1 text-blue-600 bg-blue-200 p-2 rounded-full font-bold">
+                        {resumeanalysis.atsScore * 10}
+                      </p>
+                    </div>
+
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div
+                        className="bg-blue-600 h-3 rounded-full"
+                        style={{
+                          width: `${resumeanalysis.atsScore * 10}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between">
+                      <p className="text-sm font-medium mb-1">Experience</p>
+                      <p className="text-sm mb-1 text-green-500 bg-green-200 p-2 rounded-full font-bold">{resumeanalysis.experience.score * 10}</p>
+                    </div>
+
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div
+                        className="bg-green-500 h-3 rounded-full"
+                        style={{
+                          width: `${resumeanalysis.experience.score * 10}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between">
+                      <p className="text-sm font-medium mb-1">Project</p>
+                      <p className="text-sm mb-1 text-green-500 bg-green-200 p-2 rounded-full font-bold">{resumeanalysis.projects.score * 10}</p>
+                    </div>
+
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div className="bg-yellow-500 h-3 rounded-full"
+                        style={{
+                          width: `${resumeanalysis.projects.score * 10}%`,
+                        }} />
+                    </div>
                   </div>
                 </div>
-
-                <div>
-                  <p className="text-sm font-medium mb-1">
-                    Grammar & Formatting
-                  </p>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-yellow-500 h-3 rounded-full w-[80%]"></div>
-                  </div>
-                </div>
-
               </div>
             </div>
-          </div>
-
+          )}
         </div>
       </section>
 
@@ -212,9 +249,9 @@ const page = async() => {
           internships and placements.
         </p>
 
-        <button className="mt-10 rounded-xl bg-blue-600 hover:bg-blue-700 transition duration-300 text-white px-10 py-4 text-lg font-semibold shadow-lg">
+        <Link href="/resume" className="mt-10 rounded-xl bg-blue-600 hover:bg-blue-700 transition duration-300 text-white px-10 py-4 text-lg font-semibold shadow-lg">
           Analyze Your Resume
-        </button>
+        </Link>
 
       </section>
 

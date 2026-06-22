@@ -89,6 +89,12 @@ class ApiClient {
             body: JSON.stringify({resumeContent}),
         });
     }
+    async analyseresumeforjd(resumeContent:string,jobdescription:string) {
+        return this.request("/api/jdanalysis", {
+            method: "POST",
+            body: JSON.stringify({resumeContent,jobdescription}),
+        });
+    }
 }
 
 export const apiClient = new ApiClient();

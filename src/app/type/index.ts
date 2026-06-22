@@ -3,6 +3,7 @@ export interface User{
     name:string,
     email:string,
     role:Role,
+    resumedata:string,
     createdAt:Date,
     updatedAt:Date
 }

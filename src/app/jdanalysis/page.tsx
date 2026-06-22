@@ -1,9 +1,10 @@
 
+import JdAnalyzerClient from "../component/jdanalysisclient";
 import ResumeAnalyzerClient from "../component/resumeanalyserclient";
 import { getCurrentUser } from "../lib/auth";
 
-export default async function ResumeAnalyzerPage() {
+export default async function JdAnalyzerPage() {
     const user = await getCurrentUser();
 
-    return <ResumeAnalyzerClient user={user} />;
+    return <JdAnalyzerClient user={user} />;
 }

@@ -9,7 +9,7 @@ export default function ScoreCard({
     title: string;
 }) {
     return (
-        <div className="bg-gray-800 p-6 w-[400px] rounded-xl flex flex-col items-center">
+        <div className="bg-gray-800 p-6 w-100 rounded-xl flex flex-col items-center">
             <div className="w-32 h-32">
                 <CircularProgressbar
                     value={value * 10}

@@ -1,8 +1,11 @@
 import React from 'react'
+interface WeaknessProps {
+    analysisweakness: string[];
+}
 
-const Weakness = ({analysisweakness}) => {
+const Weakness = ({analysisweakness}:WeaknessProps) => {
   return (
-      <div className="bg-gray-800 rounded-xl p-6 w-[400px]">
+      <div className="bg-gray-800 rounded-xl p-6 w-100">
           <h3 className="text-red-400 text-xl mb-4">
               ⚠ Weaknesses
           </h3>
