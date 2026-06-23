@@ -15,6 +15,7 @@ interface JDAnalysis {
     matching_qualifications: string[];
     candidate_strengths: string[];
     candidate_weaknesses: string[];
+    roadmap_to_follow:string[]
 }
 
 interface Props {

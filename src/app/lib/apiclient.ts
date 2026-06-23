@@ -101,6 +101,12 @@ class ApiClient {
             body: JSON.stringify({content}),
         });
     }
+    async eventlist(resumecontent:string) {
+        return this.request("/api/eventlist", {
+            method: "POST",
+            body: JSON.stringify({resumecontent}),
+        });
+    }
 }
 
 export const apiClient = new ApiClient();
