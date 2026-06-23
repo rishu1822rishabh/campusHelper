@@ -53,6 +53,7 @@ Return EXACTLY this JSON schema:
 "matching_qualifications": [],
 "candidate_strengths": [],
 "candidate_weaknesses": []
+"roadmap_to_follow":[]
 }
 
 Rules:

@@ -191,6 +191,19 @@ export default function JdAnalyzerClient({ user }: Props) {
                                     analysis.need_to_include
                                 }
                             />
+                            <div className="bg-gray-800 p-8 rounded-2xl">
+                                <h1 className="text-yellow-300 font-bold text-3xl text-center">Roadmap to follow for this role</h1>
+                            <ul className="space-y-3">
+                                {analysis.roadmap_to_follow.map((item, index) => (
+                                    <li
+                                        key={index}
+                                        className="bg-green-500/10 border border-green-500/20 rounded-lg p-3"
+                                    >
+                                      {item}
+                                    </li>
+                                ))}
+                            </ul>
+                            </div>
                             <ScoreCard
                                 title="resume match"
                                 value={analysis.matching_score/10}

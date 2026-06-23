@@ -54,7 +54,7 @@ const page = async () => {
             </div>
           </div>
 
-          {user && (
+          {resumeanalysis && (
             <div className="flex justify-center">
               <div className="w-full max-w-md rounded-3xl bg-white shadow-2xl p-8">
                 <div className="flex justify-between mb-6">
@@ -170,36 +170,43 @@ const page = async () => {
           {[
             {
               title: "📄 Resume Analyzer",
-              desc: "ATS score, grammar check, recruiter suggestions and skill gap analysis."
+              desc: "ATS score, grammar check, recruiter suggestions and skill gap analysis.",
+              link:"/resume"
+
             },
             {
               title: "🤖 AI Interview Prep",
-              desc: "Technical, HR and coding interview practice with AI feedback."
+              desc: "Technical, HR and coding interview practice with AI feedback.",
+              link:"/interviewprep"
             },
             {
               title: "🎯 Placement Roadmap",
-              desc: "Personalized learning roadmap based on your dream company."
+              desc: "Personalized learning roadmap based on your dream company.",
+              link:"/jdanalysis"
             },
             {
               title: "📚 Study Resources",
-              desc: "Notes, PYQs, coding sheets and curated learning materials."
+              desc: "Notes, PYQs, coding sheets and curated learning materials.",
+              link:"/resourse"
             },
             {
               title: "📅 Event Tracker",
-              desc: "Hackathons, internships, campus drives and workshops."
+              desc: "Hackathons, internships, campus drives and workshops.",
+              link:"/event"
             },
             {
               title: "💬 AI Campus Assistant",
-              desc: "Ask anything about placements, coding or academics."
+              desc: "Ask anything about placements, coding or academics.",
+              link:"/generalquestion"
             }
           ].map((feature) => (
-            <div
+            <Link href={feature.link}
               key={feature.title}
               className="rounded-2xl bg-white shadow-lg p-8 hover:shadow-2xl transition duration-300"
             >
               <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
               <p className="text-gray-600">{feature.desc}</p>
-            </div>
+            </Link>
           ))}
 
         </div>
@@ -244,7 +251,7 @@ const page = async () => {
           Ready to Land Your Dream Job?
         </h2>
 
-        <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto mb-3.5">
           Upload your resume and let AI help you improve it before applying to
           internships and placements.
         </p>

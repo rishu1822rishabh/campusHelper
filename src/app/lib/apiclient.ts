@@ -95,6 +95,12 @@ class ApiClient {
             body: JSON.stringify({resumeContent,jobdescription}),
         });
     }
+    async generalquestion(content:string) {
+        return this.request("/api/generalquestion", {
+            method: "POST",
+            body: JSON.stringify({content}),
+        });
+    }
 }
 
 export const apiClient = new ApiClient();
