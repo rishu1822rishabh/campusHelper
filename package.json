@@ -1,8 +1,8 @@
 {
-  "name": "new-app",
+  "name": "Campus Helper",
   "version": "0.1.0",
   "private": true,
-  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "description":"This a campus Helper plateform which provide full support including resume analysis , jd analysis , and Ai support for your doubt",
   "homepage": "https://github.com/rishu1822rishabh/auth#readme",
   "bugs": {
     "url": "https://github.com/rishu1822rishabh/auth/issues"
