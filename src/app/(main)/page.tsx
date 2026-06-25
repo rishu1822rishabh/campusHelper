@@ -4,21 +4,27 @@ import Link from 'next/link';
 import { apiClient } from '../lib/apiclient';
 
 const page = async () => {
-  let resumeanalysis;
+  let resumeanalysis = null;
+
   const user = await getCurrentUser();
-  if(user){
-    const data = await apiClient.analyseresume(
-      user?.resumedata || ""
-    );
-    const cleanedJson = data.analysis
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
 
+  if (user?.resumedata?.trim()) {
+    try {
+      const data = await apiClient.analyseresume(user.resumedata);
 
-    resumeanalysis = JSON.parse(cleanedJson);
+      if (data?.analysis) {
+        const cleanedJson = data.analysis
+          .replace(/```json/g, "")
+          .replace(/```/g, "")
+          .trim();
+
+        resumeanalysis = JSON.parse(cleanedJson);
+      }
+    } catch (err) {
+      resumeanalysis = null;
+    }
   }
-  
+
   return (
     <main className="bg-slate-50 text-gray-800">
 
@@ -54,7 +60,7 @@ const page = async () => {
             </div>
           </div>
 
-          {resumeanalysis && (
+          {resumeanalysis ? (
             <div className="flex justify-center">
               <div className="w-full max-w-md rounded-3xl bg-white shadow-2xl p-8">
                 <div className="flex justify-between mb-6">
@@ -121,6 +127,26 @@ const page = async () => {
                 </div>
               </div>
             </div>
+          ) : (
+            <div className="flex justify-center">
+              <div className="w-full max-w-md rounded-3xl bg-white shadow-2xl p-8 text-center">
+                <h2 className="text-2xl font-bold">
+                 you have not uploaded your resume !!
+                </h2>
+
+                <p className="text-gray-500 mt-3">
+                  Upload your resume to get an AI-powered ATS score, strengths,
+                  weaknesses, and personalized improvement suggestions.
+                </p>
+
+                <Link
+                  href="/resume"
+                  className="inline-block mt-6 rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700"
+                >
+                  Analyze Resume
+                </Link>
+              </div>
+            </div>
           )}
         </div>
       </section>
@@ -171,33 +197,33 @@ const page = async () => {
             {
               title: "📄 Resume Analyzer",
               desc: "ATS score, grammar check, recruiter suggestions and skill gap analysis.",
-              link:"/resume"
+              link: "/resume"
 
             },
             {
               title: "🤖 AI Interview Prep",
               desc: "Technical, HR and coding interview practice with AI feedback.",
-              link:"/interviewprep"
+              link: "/interviewprep"
             },
             {
               title: "🎯 Placement Roadmap",
               desc: "Personalized learning roadmap based on your dream company.",
-              link:"/jdanalysis"
+              link: "/jdanalysis"
             },
             {
               title: "📚 Study Resources",
               desc: "Notes, PYQs, coding sheets and curated learning materials.",
-              link:"/resourse"
+              link: "/resourse"
             },
             {
               title: "📅 Event Tracker",
               desc: "Hackathons, internships, campus drives and workshops.",
-              link:"/event"
+              link: "/event"
             },
             {
               title: "💬 AI Campus Assistant",
               desc: "Ask anything about placements, coding or academics.",
-              link:"/generalquestion"
+              link: "/generalquestion"
             }
           ].map((feature) => (
             <Link href={feature.link}
