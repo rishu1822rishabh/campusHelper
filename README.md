@@ -1,36 +1,180 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 Campus Helper – AI Powered Career & Placement Assistant
 
-## Getting Started
+Campus Helper is a full-stack AI-powered web application designed to help students prepare for placements by providing intelligent resume analysis, ATS optimization, job description matching, and AI-driven career guidance.
 
-First, run the development server:
+Built using **Next.js 16**, **React 19**, **TypeScript**, **Prisma**, **PostgreSQL**, **Tailwind CSS**, and **Groq AI**, the platform combines modern web technologies with large language models to deliver personalized career assistance.
+
+---
+
+## ✨ Features
+
+### 👤 Authentication
+
+* JWT Authentication
+* Secure Password Hashing (Argon2)
+* Role-Based Access Control
+* Admin & User Roles
+
+### 📄 Resume Analysis
+
+* Upload Resume
+* AI Resume Review
+* ATS Score
+* Resume Strengths
+* Resume Weaknesses
+* Improvement Suggestions
+
+### 🎯 Job Description Matching
+
+* Resume vs Job Description Analysis
+* Skill Matching
+* Missing Skills Detection
+* Matching Percentage
+
+### 🤖 AI Career Assistant
+
+* General Career Guidance
+* Placement Preparation
+* Resume Suggestions
+* Technical Advice
+
+### 👨‍💼 Admin Dashboard
+
+* User Management
+* Role Management
+* Dashboard Access
+* Analytics Foundation
+
+### 📧 Email Support
+
+* Email Integration using Nodemailer
+
+---
+
+# 🛠 Tech Stack
+
+### Frontend
+
+* Next.js 16
+* React 19
+* TypeScript
+* Tailwind CSS
+
+### Backend
+
+* Next.js Server Actions
+* Prisma ORM
+* PostgreSQL
+
+### Authentication
+
+* JWT
+* Argon2 Password Hashing
+
+### AI
+
+* Groq API
+* LLM-based Resume Analysis
+
+---
+
+# 📂 Project Structure
+
+```
+src/
+│
+├── app/
+│   ├── dashboard/
+│   ├── login/
+│   ├── register/
+│   ├── api/
+│
+├── actions/
+├── components/
+├── lib/
+├── generated/
+├── types/
+│
+prisma/
+public/
+```
+
+---
+
+# 🚀 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/rishu1822rishabh/auth
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Create a `.env` file
+
+```env
+DATABASE_URL=
+JWT_SECRET=
+GROQ_API_KEY=
+EMAIL_USER=
+EMAIL_PASS=
+```
+
+Generate Prisma Client
+
+```bash
+npm run db:generate
+```
+
+Push Database
+
+```bash
+npm run db:push
+```
+
+Run the application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 📈 Future Enhancements
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Resume Builder
+* Resume Versioning
+* Cover Letter Generator
+* LinkedIn Profile Review
+* GitHub Repository Review
+* AI Interview Simulator
+* Career Roadmap
+* Skill Gap Analysis
+* Company Specific Resume Optimization
+* Resume History
+* Analytics Dashboard
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🔒 Security
 
-To learn more about Next.js, take a look at the following resources:
+* JWT Authentication
+* Argon2 Password Hashing
+* Secure Cookies
+* Role-Based Authorization
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Planned:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Refresh Tokens
+* Rate Limiting
+* Email Verification
+* Password Reset
+* Session Management
+---
 
-## Deploy on Vercel
+# ⭐ Why This Project?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Campus Helper was developed to simplify placement preparation by combining AI with modern web technologies. The platform helps students optimize resumes, analyze job descriptions, and receive intelligent career guidance from a single application.
