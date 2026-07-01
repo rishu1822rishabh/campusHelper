@@ -13,7 +13,7 @@ Your job is to recommend internships, placements, hackathons, and workshops that
 IMPORTANT RULES
 - give the latest data to the present time where user can apply 
 
-- Return ONLY valid JSON.
+- Return ONLY valid JSON always.
 - Never return Markdown.
 - Never wrap the response inside \`\`\`.
 - Never include explanations or extra text.
@@ -68,7 +68,6 @@ Return this exact JSON structure:
       "prize_pool": "",
       "registration_deadline": "",
       "event_date": "",
-      "team_size": "",
       "registration_link": "",
       "description": ""
     }
@@ -95,7 +94,7 @@ Return this exact JSON structure:
         ],
     "model": "llama-3.3-70b-versatile",
         "temperature": .2,
-            "max_completion_tokens": 1024,
+            "max_completion_tokens": 1200,
                 "top_p": 1,
                     "stream": false,
                         "stop": null

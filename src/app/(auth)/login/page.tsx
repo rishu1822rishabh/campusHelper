@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 export type LoginState = {
     error?: string;
-    
+
     success?: boolean;
 };
 
@@ -27,9 +27,9 @@ const Loginfunction = () => {
                 })
 
 
-                setTimeout(()=>{
-                    window.location.href="/"
-                },1000)
+                setTimeout(() => {
+                    window.location.href = "/"
+                }, 1000)
 
                 return {
                     success: true,
@@ -53,18 +53,28 @@ const Loginfunction = () => {
     );
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-slate-900">
-            <div className="w-full max-w-md rounded-lg border border-slate-700 bg-slate-800 p-8">
+        <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-900 px-6">
+
+            {/* Background */}
+            <div className="absolute -left-40 top-0 h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[180px]" />
+            <div className="absolute right-0 top-40 h-[500px] w-[500px] rounded-full bg-violet-600/20 blur-[180px]" />
+            <div className="absolute bottom-0 left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-[150px]" />
+
+            <div className="relative z-10 w-full max-w-md rounded-3xl border border-white/15 bg-white/5 p-8 shadow-2xl shadow-black/40 backdrop-blur-2xl">
                 <div className="mb-8 text-center">
-                    <h2 className="text-2xl font-bold text-white">
+                    <span className="inline-block rounded-full border border-white/15 bg-white/5 px-4 py-1 text-sm font-semibold text-cyan-300 backdrop-blur-xl">
+                        Welcome Back
+                    </span>
+
+                    <h2 className="mt-5 text-2xl font-bold text-white">
                         Login to your account
                     </h2>
 
-                    <p className="mt-2 text-sm text-slate-400">
+                    <p className="mt-2 text-sm text-gray-400">
                         Or{" "}
                         <Link
                             href="/register"
-                            className="font-medium text-blue-400 hover:text-blue-300"
+                            className="font-medium text-cyan-300 hover:text-cyan-200"
                         >
                             create a new account
                         </Link>
@@ -75,7 +85,7 @@ const Loginfunction = () => {
                     <div>
                         <label
                             htmlFor="email"
-                            className="mb-1 block text-sm font-medium text-slate-300"
+                            className="mb-1 block text-sm font-medium text-gray-300"
                         >
                             Email
                         </label>
@@ -86,14 +96,14 @@ const Loginfunction = () => {
                             type="email"
                             placeholder="Enter your email"
                             required
-                            className="w-full rounded-md border border-slate-600 bg-slate-700 px-3 py-2 text-white outline-none focus:border-blue-500"
+                            className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-white outline-none backdrop-blur-xl placeholder:text-gray-500 focus:border-cyan-400/50"
                         />
                     </div>
 
                     <div>
                         <label
                             htmlFor="password"
-                            className="mb-1 block text-sm font-medium text-slate-300"
+                            className="mb-1 block text-sm font-medium text-gray-300"
                         >
                             Password
                         </label>
@@ -104,12 +114,12 @@ const Loginfunction = () => {
                             type="password"
                             placeholder="Enter your password"
                             required
-                            className="w-full rounded-md border border-slate-600 bg-slate-700 px-3 py-2 text-white outline-none focus:border-blue-500"
+                            className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-white outline-none backdrop-blur-xl placeholder:text-gray-500 focus:border-cyan-400/50"
                         />
                     </div>
 
                     {state.error && (
-                        <div className="rounded-md bg-red-500/10 p-2 text-sm text-red-400">
+                        <div className="rounded-md border border-red-500/20 bg-red-500/10 p-2 text-sm text-red-300 backdrop-blur-xl">
                             {state.error}
                         </div>
                     )}
@@ -117,7 +127,7 @@ const Loginfunction = () => {
                     <button
                         type="submit"
                         disabled={isPending}
-                        className="w-full rounded-md bg-blue-600 py-2 font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+                        className="w-full rounded-md border border-white/10 bg-gradient-to-r from-cyan-500 to-violet-600 py-2 font-medium text-white shadow-lg shadow-cyan-500/20 transition duration-300 hover:shadow-cyan-500/40 disabled:opacity-50"
                     >
                         {isPending ? "signing in..." : "sign in"}
                     </button>

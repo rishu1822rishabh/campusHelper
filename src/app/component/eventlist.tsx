@@ -75,7 +75,7 @@ export default function EventlistClient({ user }: Props) {
     const [error, setError] = useState("");
 
     const [resumeContent, setResumeContent] = useState(
-        user?.resumedata || ""
+        user?.resumedata.trim() || ""
     );
 
     const [resumeExists, setResumeExists] = useState(
@@ -104,7 +104,7 @@ export default function EventlistClient({ user }: Props) {
 
         const data = await res.json();
 
-        setResumeContent(data.text);
+        setResumeContent(data.text.trim());
         setResumeExists(true);
     };
 
@@ -145,18 +145,35 @@ export default function EventlistClient({ user }: Props) {
     };
 
     return (
-        <div className="min-h-screen bg-gray-900 p-8">
-            <div className="max-w-5xl mx-auto">
+        <div className="relative min-h-screen overflow-hidden bg-[#09090B] px-6 py-12">
 
-                <h1 className="text-3xl font-bold text-white mb-8">
-                    get list of all events
-                </h1>
+            {/* Background */}
+            <div className="absolute -left-40 top-0 h-[500px] w-[500px] rounded-full bg-cyan-500/20 blur-[180px]" />
+            <div className="absolute right-0 top-40 h-[500px] w-[500px] rounded-full bg-violet-600/20 blur-[180px]" />
+            <div className="absolute bottom-0 left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-blue-500/10 blur-[150px]" />
+
+            <div className="relative z-10 max-w-5xl mx-auto">
+
+                <div className="mb-10 text-center">
+                    <span className="inline-block rounded-full border border-white/15 bg-white/5 px-4 py-1 text-sm font-semibold text-cyan-300 backdrop-blur-xl">
+                        📅 Campus Opportunities
+                    </span>
+
+                    <h1 className="mt-5 text-4xl font-black text-white">
+                        Get List of All
+                        <span className="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent"> Events</span>
+                    </h1>
+
+                    <p className="mt-4 text-gray-400">
+                        Upload your resume to find internships, placements, hackathons and workshops matched to you.
+                    </p>
+                </div>
 
                 <form
                     onSubmit={handleSubmit}
                     className="space-y-6"
                 >
-                    <div className="bg-gray-800 rounded-2xl p-6">
+                    <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-2xl shadow-2xl shadow-black/40">
 
                         <input
                             ref={inputRef}
@@ -169,7 +186,7 @@ export default function EventlistClient({ user }: Props) {
                         <button
                             type="button"
                             onClick={handleButtonClick}
-                            className="bg-blue-600 hover:bg-blue-700 px-5 py-3 rounded-lg text-white font-semibold"
+                            className="rounded-xl border border-white/10 bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white transition duration-300 hover:scale-105"
                         >
                             {resumeExists
                                 ? "Change Resume"
@@ -187,33 +204,35 @@ export default function EventlistClient({ user }: Props) {
                             <textarea
                                 value={resumeContent}
                                 readOnly
-                                className="mt-6 w-full h-72 bg-gray-900 text-white rounded-xl p-4"
+                                className="mt-6 w-full h-72 rounded-xl border border-white/10 bg-black/30 p-4 text-white outline-none backdrop-blur-xl"
                             />
                         )}
                     </div>
 
-                    <button
-                        disabled={loading}
-                        className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg disabled:opacity-50"
-                    >
-                        {loading
-                            ? "getting all events..."
-                            : "get list of all events"}
-                    </button>
+                    <div className="flex justify-center">
+                        <button
+                            disabled={loading}
+                            className="rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-cyan-500 px-10 py-3 font-bold text-white shadow-xl transition duration-300 hover:scale-105 hover:shadow-cyan-500/30 disabled:opacity-40"
+                        >
+                            {loading
+                                ? "getting all events..."
+                                : "get list of all events"}
+                        </button>
+                    </div>
                 </form>
 
                 {error && (
-                    <div className="bg-red-500 mt-6 p-4 rounded-lg text-white">
+                    <div className="mt-6 rounded-md border border-red-500/20 bg-red-500/10 p-4 text-red-300 backdrop-blur-xl">
                         {error}
                     </div>
                 )}
 
                 {analysis && (
-                    <div className="mt-10 space-y-10">
+                    <div className="mt-10 space-y-14">
 
                         {/* Internships */}
                         <section>
-                            <h2 className="text-2xl font-bold text-white mb-4">
+                            <h2 className="text-2xl font-bold text-white mb-6">
                                 💼 Internships
                             </h2>
 
@@ -222,13 +241,13 @@ export default function EventlistClient({ user }: Props) {
                                     analysis.internships.map((item, index) => (
                                         <div
                                             key={index}
-                                            className="bg-gray-800 rounded-xl p-6 shadow-lg"
+                                            className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-2xl shadow-2xl shadow-black/30  hover:shadow-gray-400/30 transition duration-300 hover:border-cyan-400/30"
                                         >
                                             <h3 className="text-xl font-bold text-white">
                                                 {item.title}
                                             </h3>
 
-                                            <p className="text-blue-400">
+                                            <p className="text-cyan-300">
                                                 {item.company}
                                             </p>
 
@@ -244,7 +263,7 @@ export default function EventlistClient({ user }: Props) {
                                                 ⏳ {item.duration}
                                             </p>
 
-                                            <p className="text-green-400">
+                                            <p className="text-emerald-300">
                                                 💰 {item.stipend}
                                             </p>
 
@@ -256,7 +275,7 @@ export default function EventlistClient({ user }: Props) {
                                                 {item.skills_required.map((skill) => (
                                                     <span
                                                         key={skill}
-                                                        className="bg-blue-600 text-white px-2 py-1 rounded-full text-sm"
+                                                        className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-2 py-1 text-sm text-cyan-300"
                                                     >
                                                         {skill}
                                                     </span>
@@ -266,7 +285,7 @@ export default function EventlistClient({ user }: Props) {
                                             <a
                                                 href={item.application_link}
                                                 target="_blank"
-                                                className="inline-block mt-4 text-blue-400 hover:underline"
+                                                className="inline-block mt-4 text-cyan-300 hover:text-cyan-200 hover:underline"
                                             >
                                                 Apply →
                                             </a>
@@ -280,7 +299,7 @@ export default function EventlistClient({ user }: Props) {
 
                         {/* Placements */}
                         <section>
-                            <h2 className="text-2xl font-bold text-white mb-4">
+                            <h2 className="text-2xl font-bold text-white mb-6">
                                 🏢 Placements
                             </h2>
 
@@ -289,13 +308,13 @@ export default function EventlistClient({ user }: Props) {
                                     analysis.placements.map((item, index) => (
                                         <div
                                             key={index}
-                                            className="bg-gray-800 rounded-xl p-6"
+                                            className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-2xl shadow-2xl shadow-black/30  hover:shadow-gray-400/30 transition duration-300 hover:border-emerald-400/30"
                                         >
                                             <h3 className="text-xl font-bold text-white">
                                                 {item.role}
                                             </h3>
 
-                                            <p className="text-blue-400">
+                                            <p className="text-cyan-300">
                                                 {item.company}
                                             </p>
 
@@ -303,7 +322,7 @@ export default function EventlistClient({ user }: Props) {
                                                 📍 {item.location}
                                             </p>
 
-                                            <p className="text-green-400">
+                                            <p className="text-emerald-300">
                                                 💰 {item.package}
                                             </p>
 
@@ -315,7 +334,7 @@ export default function EventlistClient({ user }: Props) {
                                                 {item.required_skills.map((skill) => (
                                                     <span
                                                         key={skill}
-                                                        className="bg-green-600 px-2 py-1 rounded-full text-sm"
+                                                        className="rounded-full border border-emerald-400/20 bg-emerald-500/10 px-2 py-1 text-sm text-emerald-300"
                                                     >
                                                         {skill}
                                                     </span>
@@ -325,7 +344,7 @@ export default function EventlistClient({ user }: Props) {
                                             <a
                                                 href={item.apply_link}
                                                 target="_blank"
-                                                className="inline-block mt-4 text-blue-400 hover:underline"
+                                                className="inline-block mt-4 text-cyan-300 hover:text-cyan-200 hover:underline"
                                             >
                                                 Apply →
                                             </a>
@@ -339,7 +358,7 @@ export default function EventlistClient({ user }: Props) {
 
                         {/* Hackathons */}
                         <section>
-                            <h2 className="text-2xl font-bold text-white mb-4">
+                            <h2 className="text-2xl font-bold text-white mb-6">
                                 🚀 Hackathons
                             </h2>
 
@@ -348,13 +367,13 @@ export default function EventlistClient({ user }: Props) {
                                     analysis.hackathons.map((item, index) => (
                                         <div
                                             key={index}
-                                            className="bg-gray-800 rounded-xl p-6"
+                                            className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-2xl shadow-2xl shadow-black/30  hover:shadow-gray-400/30 transition duration-300 hover:border-violet-400/30"
                                         >
                                             <h3 className="text-xl font-bold text-white">
                                                 {item.name}
                                             </h3>
 
-                                            <p className="text-blue-400">
+                                            <p className="text-cyan-300">
                                                 {item.organizer}
                                             </p>
 
@@ -362,7 +381,7 @@ export default function EventlistClient({ user }: Props) {
                                                 📍 {item.location}
                                             </p>
 
-                                            <p className="text-yellow-400">
+                                            <p className="text-amber-300">
                                                 🏆 {item.prize_pool}
                                             </p>
 
@@ -373,7 +392,7 @@ export default function EventlistClient({ user }: Props) {
                                             <a
                                                 href={item.registration_link}
                                                 target="_blank"
-                                                className="inline-block mt-4 text-blue-400 hover:underline"
+                                                className="inline-block mt-4 text-cyan-300 hover:text-cyan-200 hover:underline"
                                             >
                                                 Register →
                                             </a>
@@ -387,7 +406,7 @@ export default function EventlistClient({ user }: Props) {
 
                         {/* Workshops */}
                         <section>
-                            <h2 className="text-2xl font-bold text-white mb-4">
+                            <h2 className="text-2xl font-bold text-white mb-6">
                                 🎓 Workshops
                             </h2>
 
@@ -396,13 +415,13 @@ export default function EventlistClient({ user }: Props) {
                                     analysis.workshops.map((item, index) => (
                                         <div
                                             key={index}
-                                            className="bg-gray-800 rounded-xl p-6"
+                                            className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-2xl shadow-2xl hover:shadow-gray-400/30 transition duration-300 hover:border-cyan-400/30"
                                         >
                                             <h3 className="text-xl font-bold text-white">
                                                 {item.title}
                                             </h3>
 
-                                            <p className="text-blue-400">
+                                            <p className="text-cyan-300">
                                                 {item.organizer}
                                             </p>
 
@@ -418,7 +437,7 @@ export default function EventlistClient({ user }: Props) {
                                                 {item.description}
                                             </p>
 
-                                            <p className="mt-2 text-green-400">
+                                            <p className="mt-2 text-emerald-300">
                                                 {item.certificate
                                                     ? "Certificate Available"
                                                     : "No Certificate"}
@@ -427,7 +446,7 @@ export default function EventlistClient({ user }: Props) {
                                             <a
                                                 href={item.registration_link}
                                                 target="_blank"
-                                                className="inline-block mt-4 text-blue-400 hover:underline"
+                                                className="inline-block mt-4 text-cyan-300 hover:text-cyan-200 hover:underline"
                                             >
                                                 Register →
                                             </a>

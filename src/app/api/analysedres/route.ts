@@ -3,8 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     try {
-        const { resumeContent} = await req.json();
-
+        const { resumeContent } = await req.json();
         if (!resumeContent) {
             return NextResponse.json(
                 {
