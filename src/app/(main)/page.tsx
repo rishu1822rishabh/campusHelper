@@ -81,7 +81,7 @@ const page = async () => {
                     </p>
                   </div>
 
-                  <div className="h-16 w-16 rounded-full border border-emerald-400/30 bg-emerald-400/10 flex items-center justify-center text-emerald-300 font-bold text-xl backdrop-blur-xl">
+                  <div className="h-16 w-16 rounded-full border border-emerald-400/30 bg-emerald-400/10 flex items-center justify-center text-emerald-300 font-bold text-xl backdrop-blur-xl hover:text-white hover:border-emerald-400/50 hover:bg-emerald-400/30">
                     {resumeanalysis.overallScore * 10}
                   </div>
                 </div>
@@ -164,7 +164,7 @@ const page = async () => {
       {/* Stats */}
       <section className="relative py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center rounded-3xl border border-white/10 bg-white/5 p-10 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center rounded-3xl border border-white/10  bg-white/10 p-10 shadow-2xl shadow-black/30 backdrop-blur-2xl">
 
             <div>
               <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">5000+</h2>

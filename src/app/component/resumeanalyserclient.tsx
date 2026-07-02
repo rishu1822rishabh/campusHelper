@@ -142,9 +142,9 @@ export default function ResumeAnalyzerClient({ user }: Props) {
 
                     {/* Upload Section */}
 
-                    <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.45)] p-8">
+                    <div className="rounded-3xl border text-center border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.45)] p-8">
 
-                        <div className="grid gap-10 lg:grid-cols-2">
+                        <div className="flex justify-center gap-10">
 
                             {/* Upload */}
 
@@ -161,7 +161,7 @@ export default function ResumeAnalyzerClient({ user }: Props) {
                                 <button
                                     type="button"
                                     onClick={handleButtonClick}
-                                    className="rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:scale-105"
+                                    className="rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white transition duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-300"
                                 >
                                     {resumeExists
                                         ? "Change Resume"
@@ -202,11 +202,9 @@ export default function ResumeAnalyzerClient({ user }: Props) {
                                 border
                                 border-white/10
                                 bg-black/30
-                                p-5
+                                p-2
                                 text-gray-300
                                 outline-none
-                                overflow-y-auto
-                                scrollbar-hide
                                 "
                                     />
 
