@@ -106,7 +106,7 @@ public/
 Clone the repository
 
 ```bash
-git clone https://github.com/rishu1822rishabh/auth
+git clone https://github.com/rishu1822rishabh/campusHelper
 ```
 
 Install dependencies
